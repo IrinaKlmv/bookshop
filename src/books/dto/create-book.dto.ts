@@ -5,5 +5,5 @@ export class CreateBookDto {
     public price: number;
     public quantity: number;
     public poster: string;
-    public author: string;
+    public authorId: number;
 }

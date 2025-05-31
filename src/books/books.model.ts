@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Author } from "src/authors/authors.model";
 
 interface BookCreationAttrs {
     name: string;
@@ -8,7 +9,7 @@ interface BookCreationAttrs {
     price: number;
     quantity: number;
     poster: string;
-    author: string;
+    authorId: number;
 }
 
 @Table({tableName: 'books'})
@@ -41,7 +42,7 @@ export class Book extends Model<Book, BookCreationAttrs> {
     @Column({type: DataType.STRING})
     poster: string;
 
-    @ApiProperty({example: 'Пушкин А.С', description: 'Автор книги'})
-    @Column({type: DataType.STRING})
-    author: string;
+    @ForeignKey(() => Author)
+    @Column({type: DataType.INTEGER})
+    authorId: number;
 }
